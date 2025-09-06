@@ -1,5 +1,5 @@
 # ECE371 -- Data Visualization
 ## James Ryan, Fall 2025
 
-This is just the root for all projects. See each directory for project 
-specs and licensing information
+All projects are AGPLv3, unless otherwise noted in their project directory.
+See `LICENSE` for details.
