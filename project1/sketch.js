@@ -25,6 +25,10 @@ function draw() {
 
     background(50);
 
+    let bottomLineColor = color(30, 30, 30);
+    fill(bottomLineColor);
+    rect(0, config.HEIGHT * 0.9 + 1, config.WIDTH, 3);
+
     drawClockState(hr, min, sec);
 }
 
