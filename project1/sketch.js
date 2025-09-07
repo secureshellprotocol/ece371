@@ -1,6 +1,6 @@
 let config = {
-    WIDTH: 1920,
-    HEIGHT: 900
+    WIDTH: 1280,
+    HEIGHT: 600
 };
 
 let state = {
