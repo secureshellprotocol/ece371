@@ -59,7 +59,7 @@ function drawClockState(hr, min, sec) {
     }
 
     // Draw 12 evenly spaced wicks right-to-left
-    for (let w = 0; w < numActive; w++) {
+    for (let w = 0; w < 12; w++) {
         // Calculate the offset from the left. We account for the total space
         // each candle takes, adding an offset to place it roughly in the center
         let offsetPercent = 100 * ( (12-w) / 12);
@@ -67,8 +67,10 @@ function drawClockState(hr, min, sec) {
         if (state.recharge == 0) {
             if (w == numActive-1) {   // last wick, getting 'consumed'
                 drawWick(min, sec, offsetPercent, 1);
-            } else {
+            } else if (w < numActive) {
                 drawWick(0, 0, offsetPercent, 0);
+            } else {
+                drawWick(60, 60, offsetPercent, 0);
             }
         } else {    // recharge routine
             state.minute_change_chime = 1;
@@ -103,5 +105,10 @@ function drawWick(min, sec, horizOffsetPercent, noisy) {
     let c = color(225, 225, 225);
     fill(c);
     noStroke();
-    rect(buffer + offset - 8, 0, 16, config.HEIGHT * 0.9 * percentRemaining);
+    rect(buffer + offset - 4, 0, 8, config.HEIGHT * 0.9 * percentRemaining);
+
+    // draw the base
+    let basec = color(205,133,63);
+    fill(basec);
+    ellipse(buffer + offset, 0, 30, 6);
 }
