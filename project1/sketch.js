@@ -42,7 +42,6 @@ function drawClockState(hr, min, sec) {
     // if we're rolling over from hr 12 -> 1, 'recharge'
     if (numActive == 12 && min == 0 && sec == 0) {
         state.recharge = 450;
-        return
     }
 
     // the end of a wick 'chimes' for one second when we go to the next minute
@@ -87,8 +86,8 @@ function drawClockState(hr, min, sec) {
 function drawWick(min, sec, horizOffsetPercent, noisy) {
     // convert relative measurements to pixels
     // place a 10% buffer on both sides of the canvas, then calculate the offset
-    let buffer = config.WIDTH * 0.1
-    let offset = (buffer * 8) * (horizOffsetPercent / 100);
+    let buffer = config.WIDTH * 0.05;
+    let offset = (config.WIDTH * 0.9) * (horizOffsetPercent / 100);
 
     // calculate how much of the wick remains, in percent
     let percentRemaining = 1 - (((60 * min) + (sec)) / 3600);
@@ -98,17 +97,17 @@ function drawWick(min, sec, horizOffsetPercent, noisy) {
         let bell_color = color(191, 191, 0);
         bell_color.setAlpha(state.minute_change_opacity);
         fill(bell_color);
-        circle(buffer + offset, config.HEIGHT * 0.9 * percentRemaining, 30);
+        circle(offset, config.HEIGHT * 0.9 * percentRemaining, 30);
     }
 
     // draw the wick
     let c = color(225, 225, 225);
     fill(c);
     noStroke();
-    rect(buffer + offset - 4, 0, 8, config.HEIGHT * 0.9 * percentRemaining);
+    rect(offset - 4, 3, 8, config.HEIGHT * 0.9 * percentRemaining);
 
     // draw the base
     let basec = color(205,133,63);
     fill(basec);
-    ellipse(buffer + offset, 0, 30, 6);
+    ellipse(offset, 0, 30, 6);
 }
